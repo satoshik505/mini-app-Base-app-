@@ -1,0 +1,21 @@
+import { useMiniApp } from '@neynar/react';
+
+export default function HomePage() {
+  const { isSDKLoaded, addMiniApp } = useMiniApp();
+
+  const handleAddMiniApp = async () => {
+    if (!isSDKLoaded) return;
+    
+    const result = await addMiniApp();
+    if (result.added && result.notificationDetails) {
+      // Mini app was added and notifications were enabled
+      console.log('Notification token:', result.notificationDetails.token);
+    }
+  };
+
+  return (
+    <button onClick={handleAddMiniApp}>
+      Add Mini App
+    </button>
+  );
+}
